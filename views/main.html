@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Morrowind Potion Helper</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+    {% if Warn %}
+    <div class="potionGrid">{{Warn}}</div>
+    {% endif %}
+
+    <form id="potionForm" method="get">
+        <div>
+            <label for="I1">Effect 1:</label>
+            <select id="I1" name="I1">
+                {% for item in Selections %}
+                <option value="{{ item.value }}" {% if item.selected==1 %}selected{% endif %}>{{ item.value }}
+                </option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <div>
+            <label for="I2">Effect 2:</label>
+            <select id="I2" name="I2">
+                {% for item in Selections %}
+                <option value="{{ item.value }}" {% if item.selected==2 %}selected{% endif %}>{{ item.value }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="I3">Effect 3:</label>
+            <select id="I3" name="I3">
+                {% for item in Selections %}
+                <option value="{{ item.value }}" {% if item.selected==3 %}selected{% endif %}>{{ item.value }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="I4">Effect 4:</label>
+            <select id="I4" name="I4">
+                {% for item in Selections %}
+                <option value="{{ item.value }}" {% if item.selected==4 %}selected{% endif %}>{{ item.value }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+    {% if Output %}
+    <div id="res" class="potionGrid">
+        {% for out in Output %}
+        <section class="resultCard">
+            <h1>{{out.heading}}</h1>
+            {% for section in out.groups %}
+            <h2>{{section.effects}}</h2>
+            <div class="ingredientList">
+                {% for item in section.ingredients %}
+                <div class="ingredient">{{item}}</div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </section>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+
+</html>
